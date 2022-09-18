@@ -6,6 +6,10 @@ public class Agencia {
 	private Banco bancoCadastrado;
 	private int id;
 	
+	public Agencia(int id) {
+		setId(id);
+	}
+	
 	public String getEndAgencia() {
 		return endAgencia;
 	}
@@ -25,5 +29,9 @@ public class Agencia {
 		this.id = id;
 	}
 	
+	@Override
+	public String toString() {
+		return "Id da Agência: "+getId()+"\nEndereço: "+getEndAgencia()+"\n"+bancoCadastrado.getNome();
+	}
 	
 }

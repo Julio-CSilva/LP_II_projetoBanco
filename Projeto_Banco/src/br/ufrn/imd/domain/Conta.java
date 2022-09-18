@@ -9,7 +9,11 @@ public class Conta {
 	private String status;
 	private float saldo;
 	private List<String> historico;
-	private List<Cliente> clientes;
+	private Banco banco;
+	
+	public Conta(int id) {
+		this.id = id;
+	}
 	
 	public int getId() {
 		return id;
@@ -41,12 +45,49 @@ public class Conta {
 	public void setHistorico(List<String> historico) {
 		this.historico = historico;
 	}
-	public List<Cliente> getClientes() {
-		return clientes;
+	public Banco getBanco() {
+		return banco;
 	}
-	public void setClientes(List<Cliente> clientes) {
-		this.clientes = clientes;
+	public void setBanco(Banco banco) {
+		this.banco = banco;
 	}
+	
+	//metodos
+	public void addValor(float valor){
+		this.saldo += valor;
+	}
+
+	public void retirarValor(float valor){
+		this.saldo -= valor;
+	}
+	
+	public void transferir(float valor, int conta2) {
+		if(this.status == "Ativa" && this.saldo >= valor) {
+			getBanco().transferencia(valor, conta2);
+			this.saldo -= valor;
+		} else {
+			System.out.println("Conta sem saldo, ou desativada...");
+		}
+	}
+	
+	public void emprestimo(float valor) {
+		if(this.status == "Ativa") {
+			addValor(valor);
+		} else {
+			System.out.println("Não é possivel realizar está ação a conta selecionada está desativada!");
+		}
+	}
+	
+	public void desativarConta() {
+		setStatus("Desativada");
+	}
+
+	@Override
+	public String toString() {
+		return "Conta [id=" + id + ", tipo=" + tipo + ", status=" + status + ", banco=" + banco + "]";
+	}
+	
+	
 	
 	
 }

@@ -75,7 +75,7 @@ public class Conta {
 
 	@Override
 	public String toString() {
-		return "Conta [id: " + id + ", tipo: " + tipo + ", status: " + status + ", banco: " + banco + "]";
+		return "Conta [id: " + id + ", tipo: " + tipo + ", status: " + status + ", banco: " + banco.getNome() + ", saldo: " + getSaldo() + "]";
 	}
 	
 	

@@ -26,7 +26,7 @@ public class Interface {
 
         //criação do banco da agencia
         System.out.println("Agora, vamos criar um Banco para a sua Agencia! Comece digitando um nome para o Banco: ");
-        Banco banco = new Banco(agencia.getId());
+        Banco banco = new Banco();
         banco.setNome(sc.nextLine());
         
         //finalização da agencia
@@ -82,9 +82,10 @@ public class Interface {
                 //selecionar o banco
                 System.out.println("Selecione o banco onde deseja criar a conta, digitando seu respectivo id: ");
 			    for(Agencia d : agencias){
-				    System.out.println(d.getBancoCadastrado());
+				    System.out.println(d);
 		  	    }
-                conta.setBanco(agencias.get(sc.nextInt()).getBancoCadastrado());
+                int idbanco = sc.nextInt();
+                conta.setBanco(agencias.get(idbanco).getBancoCadastrado());
                 sc.nextLine();
                 conta.setStatus("Ativa");
                 //tipo de conta
@@ -93,12 +94,12 @@ public class Interface {
                 //adicionar saldo
                 System.out.println("Quanto deseja depositar na conta? ");
                 conta.setSaldo(sc.nextFloat());
-                agencias.get(sc.nextInt()).getBancoCadastrado().contas.add(conta);
-                cliente.contas.add(conta);
+                agencias.get(idbanco).getBancoCadastrado().addConta(conta);
+                cliente.addConta(conta);
                 
-
                 break;
                 case 2:
+                    sc.nextLine();
                     System.out.println("Selecione a sua conta a ser usada na transferencia: ");
                     for(Conta d : cliente.getContas()){
                         System.out.println(d);
@@ -108,16 +109,21 @@ public class Interface {
                 	for(Agencia d : agencias){
                         System.out.println(d);
                       }
-                    int idbanco = sc.nextInt();
+                    int idbanco2 = sc.nextInt();
                     System.out.println("Digite o id da conta do destinatario: ");
                 	int iddestinatario = sc.nextInt();
                     System.out.println("Digite o valor a ser transferido: ");
-                    if(cliente.contas.get(idconta).status == "Ativa" && cliente.contas.get(idconta).saldo >= valor) {
-                        agencias.get(idbanco).getBanco.transferencia(sc.nextFloat(), iddestinatario);
-                        cliente.contas.get(idconta).retirarValor(valor);
+                    float valortransferencia = sc.nextFloat();
+                    if(cliente.getConta(idconta).getStatus() == "Ativa" && cliente.getConta(idconta).getSaldo() >= valortransferencia) {
+                        agencias.get(idbanco2).getBancoCadastrado().transferencia(valortransferencia, iddestinatario);
+                        cliente.getConta(idconta).retirarValor(sc.nextFloat());
                     } else {
                         System.out.println("Conta sem saldo, ou desativada...");
                     }
+                    break;
+                case 5:
+                sistemaCliente = false;
+                break;
             }
         }
     }

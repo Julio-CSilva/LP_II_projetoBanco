@@ -31,7 +31,7 @@ public class Agencia {
 	
 	@Override
 	public String toString() {
-		return "Id da Agência: "+getId()+"\n Endereço: "+getEndAgencia()+" Banco: "+bancoCadastrado.getNome();
+		return "Id da Agência: "+getId()+" Endereço: "+getEndAgencia()+" Banco: "+bancoCadastrado.getNome();
 	}
 	
 }

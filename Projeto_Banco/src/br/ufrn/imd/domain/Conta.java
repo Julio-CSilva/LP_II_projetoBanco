@@ -61,15 +61,6 @@ public class Conta {
 		this.saldo -= valor;
 	}
 	
-	public void transferir(float valor, int conta2) {
-		if(this.status == "Ativa" && this.saldo >= valor) {
-			getBanco().transferencia(valor, conta2);
-			this.saldo -= valor;
-		} else {
-			System.out.println("Conta sem saldo, ou desativada...");
-		}
-	}
-	
 	public void emprestimo(float valor) {
 		if(this.status == "Ativa") {
 			addValor(valor);
@@ -84,7 +75,7 @@ public class Conta {
 
 	@Override
 	public String toString() {
-		return "Conta [id=" + id + ", tipo=" + tipo + ", status=" + status + ", banco=" + banco + "]";
+		return "Conta [id: " + id + ", tipo: " + tipo + ", status: " + status + ", banco: " + banco + "]";
 	}
 	
 	

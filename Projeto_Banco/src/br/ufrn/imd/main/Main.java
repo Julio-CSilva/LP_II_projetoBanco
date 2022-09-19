@@ -67,14 +67,7 @@ public class Main {
 		  System.out.println("O número escolhido é inválido!");
 
         }
-  
 
-
-
-
-
-
-        
       }
       
     } finally {

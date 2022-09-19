@@ -3,7 +3,7 @@ package br.ufrn.imd.domain;
 public class Cliente  extends Pessoa{
 
 	private int id;
-	private Conta conta;
+	private List<Conta> contas;
 	private int idconta = 0;
 
 
@@ -12,8 +12,8 @@ public class Cliente  extends Pessoa{
 	public Cliente(int id) {
 		this.id = id;
 	}
-	//getters e setters
 
+	//getters e setters
 	public int getIdconta() {
 		int idtemp = 0;
 		idtemp = this.idconta;
@@ -28,6 +28,9 @@ public class Cliente  extends Pessoa{
 	public void setId(int id) {
 		this.id = id;
 	}
+	public List<Conta> getContas() {
+		return contas;
+	}
 
 	//metodos
 	public void receber(float valor){
@@ -40,7 +43,7 @@ public class Cliente  extends Pessoa{
 
 	@Override
 	public String toString() {
-		return "Cliente [id: " + id + "Nome: " + getNome() + "Cpf: " + getCpf() + "]";
+		return "Cliente [id: " + id + ", Nome: " + getNome() + ", Cpf: " + getCpf() + "]";
 	}
 	
 	

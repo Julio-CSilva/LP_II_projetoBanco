@@ -93,17 +93,31 @@ public class Interface {
                 //adicionar saldo
                 System.out.println("Quanto deseja depositar na conta? ");
                 conta.setSaldo(sc.nextFloat());
+                agencias.get(sc.nextInt()).getBancoCadastrado().contas.add(conta);
+                cliente.contas.add(conta);
+                
 
                 break;
                 case 2:
-                	System.out.println("Digite o Id da conta do destinatario: ");
+                    System.out.println("Selecione a sua conta a ser usada na transferencia: ");
+                    for(Conta d : cliente.getContas()){
+                        System.out.println(d);
+                      }
+                    int idconta = sc.nextInt();
+                	System.out.println("Selecione o banco do destinatario: ");
                 	for(Agencia d : agencias){
-    				    for(Conta b : d.getBancoCadastrado().getContas()) {
-    				    	System.out.println(b);
-    				    	
-    				    }
-    		  	    }
-                	
+                        System.out.println(d);
+                      }
+                    int idbanco = sc.nextInt();
+                    System.out.println("Digite o id da conta do destinatario: ");
+                	int iddestinatario = sc.nextInt();
+                    System.out.println("Digite o valor a ser transferido: ");
+                    if(cliente.contas.get(idconta).status == "Ativa" && cliente.contas.get(idconta).saldo >= valor) {
+                        agencias.get(idbanco).getBanco.transferencia(sc.nextFloat(), iddestinatario);
+                        cliente.contas.get(idconta).retirarValor(valor);
+                    } else {
+                        System.out.println("Conta sem saldo, ou desativada...");
+                    }
             }
         }
     }

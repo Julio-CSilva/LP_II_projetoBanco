@@ -73,7 +73,8 @@ public class Interface {
             		+ "\n2 - transferir dinheiro "
             		+ "\n3 - Emprestimo "
             		+ "\n4 - Desativar uma conta "
-            		+ "\n5 - Voltar para o menu anterior");
+            		+ "\n5 - Ver contas"
+            		+ "\n6 - Voltar para o menu anterior");
             
             switch(sc.nextInt()){
                 case 1:
@@ -116,24 +117,24 @@ public class Interface {
                     float valortransferencia = sc.nextFloat();
                     if(cliente.getConta(idconta).getStatus() == "Ativa" && cliente.getConta(idconta).getSaldo() >= valortransferencia) {
                         agencias.get(idbanco2).getBancoCadastrado().transferencia(valortransferencia, iddestinatario);
-                        cliente.getConta(idconta).retirarValor(sc.nextFloat());
+                        cliente.getConta(idconta).retirarValor(valortransferencia);
                     } else {
                         System.out.println("Conta sem saldo, ou desativada...");
                     }
                     break;
                 case 3:
                     sc.nextLine();
-                    System.out.println("Selecione a conta que deseja desativar: ");
+                    System.out.println("Selecione a conta que deseja realizar o emprestimo: ");
                     for(Conta d : cliente.getContas()){
                     System.out.println(d);
                     }
                     
-                    idconta = sc.nextInt();
+                    int idconta3 = sc.nextInt();
 
                     System.out.println("Valor do emprestimo: ");
                     float valorR = sc.nextFloat();
 
-                    cliente.getConta(idconta).addValor(valorR);
+                    cliente.getConta(idconta3).addValor(valorR);
 
                     break;
                 case 4:
@@ -149,8 +150,18 @@ public class Interface {
                     
                     break;
                 case 5:
-                sistemaCliente = false;
-                break;
+                	for(Conta d : cliente.getContas()){
+                        System.out.println(d+"\n");
+                        }
+                	break;
+                
+                case 6:
+                	sistemaCliente = false;
+                    break;
+                
+                default:
+                	System.out.println("Opção invalida!");
+                	break;
             }
         }
     }

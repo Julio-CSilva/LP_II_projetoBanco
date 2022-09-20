@@ -28,6 +28,10 @@ public class Agencia {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public void transferencia (float valor, int iddestino){
+		bancoCadastrado.transferencia(valor, iddestino);
+	}
 	
 	@Override
 	public String toString() {

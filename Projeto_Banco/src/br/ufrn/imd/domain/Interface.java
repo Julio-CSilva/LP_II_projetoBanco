@@ -72,7 +72,7 @@ public class Interface {
             		+ "\n1 - Criar uma conta bancaria "
             		+ "\n2 - transferir dinheiro "
             		+ "\n3 - Emprestimo "
-            		+ "\n4 - Desativar uma conta "
+            		+ "\n4 - Ativar ou Desativar uma conta "
             		+ "\n5 - Ver contas"
             		+ "\n6 - Voltar para o menu anterior");
             
@@ -81,14 +81,14 @@ public class Interface {
                 sc.nextLine();
                 Conta conta = new Conta(cliente.getIdconta());
                 //selecionar o banco
-                System.out.println("Selecione o banco onde deseja criar a conta, digitando seu respectivo id: ");
+                System.out.println("Digite o id da agencia com o banco onde deseja criar a conta, digitando seu respectivo id: ");
 			    for(Agencia d : agencias){
 				    System.out.println(d);
 		  	    }
                 int idbanco = sc.nextInt();
                 conta.setBanco(agencias.get(idbanco).getBancoCadastrado());
                 sc.nextLine();
-                conta.setStatus("Ativa");
+                conta.setStatus("Ativada");
                 //tipo de conta
                 System.out.println("Qual tipo de conta você esta criando? Digite o nome da opção desejada:\n-Corrente\n-Poupança");
                 conta.setTipo(sc.nextLine());
@@ -101,26 +101,38 @@ public class Interface {
                 break;
                 case 2:
                     sc.nextLine();
-                    System.out.println("Selecione a sua conta a ser usada na transferencia: ");
+                    int idconta = 0;
+                    int idbanco2 = 0;
+                    int iddestinatario = 0;
+                    float valortransferencia = 0;
+
+                    System.out.println("Digite o id da sua conta a ser usada na transferencia: ");
                     for(Conta d : cliente.getContas()){
                         System.out.println(d);
                       }
-                    int idconta = sc.nextInt();
-                	System.out.println("Selecione o banco do destinatario: ");
+                    idconta = sc.nextInt();
+
+                	System.out.println("Digite o id da agencia com o banco do destinatario: ");
                 	for(Agencia d : agencias){
                         System.out.println(d);
                       }
-                    int idbanco2 = sc.nextInt();
+                    idbanco2 = sc.nextInt();
+
                     System.out.println("Digite o id da conta do destinatario: ");
-                	int iddestinatario = sc.nextInt();
+                	iddestinatario = sc.nextInt();
+
                     System.out.println("Digite o valor a ser transferido: ");
-                    float valortransferencia = sc.nextFloat();
-                    if(cliente.getConta(idconta).getStatus() == "Ativa" && cliente.getConta(idconta).getSaldo() >= valortransferencia) {
-                        agencias.get(idbanco2).getBancoCadastrado().transferencia(valortransferencia, iddestinatario);
+                    valortransferencia = sc.nextFloat();
+
+                    if(cliente.getConta(idconta).getStatus() == "Ativada" && cliente.getConta(idconta).getSaldo() >= valortransferencia) {
+                        agencias.get(idbanco2).transferencia(valortransferencia, iddestinatario);
                         cliente.getConta(idconta).retirarValor(valortransferencia);
+
                     } else {
-                        System.out.println("Conta sem saldo, ou desativada...");
+                        System.out.println("Conta sem saldo, ou desativada...\n");
+
                     }
+
                     break;
                 case 3:
                     sc.nextLine();
@@ -131,21 +143,25 @@ public class Interface {
                     
                     int idconta3 = sc.nextInt();
 
-                    System.out.println("Valor do emprestimo: ");
-                    float valorR = sc.nextFloat();
-
-                    cliente.getConta(idconta3).addValor(valorR);
+                    if(cliente.getConta(idconta3).getStatus() == "Ativada"){
+                        System.out.println("Valor do emprestimo: ");
+                        float valorR = sc.nextFloat();
+                        cliente.getConta(idconta3).addValor(valorR);
+                    } else {
+                        System.out.println("Conta desativada, selecione outra conta por favor!\n");
+                    }
 
                     break;
                 case 4:
                     sc.nextLine();
-                    System.out.println("Selecione a conta que deseja desativar: ");
+                    System.out.println("Selecione a conta que deseja ativar ou desativar: ");
                     for(Conta d : cliente.getContas()){
                     System.out.println(d);
                     }
 
                     idconta = sc.nextInt();
-                    cliente.getConta(idconta).desativarConta();
+                    
+                    cliente.getConta(idconta).ativardesativarConta();
 
                     
                     break;

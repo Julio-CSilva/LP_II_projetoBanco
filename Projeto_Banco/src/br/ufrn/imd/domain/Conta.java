@@ -45,11 +45,11 @@ public class Conta {
 	
 	//metodos
 	public void addValor(float valor){
-		this.saldo = this.saldo + valor;
+		this.saldo = saldo + valor;
 	}
 
 	public void retirarValor(float valor){
-		this.saldo = this.saldo - valor;
+		this.saldo = saldo - valor;
 	}
 	
 	public void emprestimo(float valor) {
@@ -60,8 +60,12 @@ public class Conta {
 		}
 	}
 	
-	public void desativarConta() {
-		setStatus("Desativada");
+	public void ativardesativarConta() {
+		if(this.status == "Ativada"){
+			setStatus("Desativada");
+		} else {
+			setStatus("Ativada");
+		}
 	}
 
 	@Override

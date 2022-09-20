@@ -1,14 +1,11 @@
 package br.ufrn.imd.domain;
 
-import java.util.List;
-
 public class Conta {
 
 	private int id;
 	private String tipo;
 	private String status;
 	private float saldo;
-	private List<String> historico;
 	private Banco banco;
 	
 	public Conta(int id) {
@@ -39,12 +36,6 @@ public class Conta {
 	public void setSaldo(float saldo) {
 		this.saldo = saldo;
 	}
-	public List<String> getHistorico() {
-		return historico;
-	}
-	public void setHistorico(List<String> historico) {
-		this.historico = historico;
-	}
 	public Banco getBanco() {
 		return banco;
 	}
@@ -54,11 +45,11 @@ public class Conta {
 	
 	//metodos
 	public void addValor(float valor){
-		this.saldo += valor;
+		this.saldo = this.saldo + valor;
 	}
 
 	public void retirarValor(float valor){
-		this.saldo -= valor;
+		this.saldo = this.saldo - valor;
 	}
 	
 	public void emprestimo(float valor) {

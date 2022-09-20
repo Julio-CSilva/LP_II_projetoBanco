@@ -121,6 +121,33 @@ public class Interface {
                         System.out.println("Conta sem saldo, ou desativada...");
                     }
                     break;
+                case 3:
+                    sc.nextLine();
+                    System.out.println("Selecione a conta que deseja desativar: ");
+                    for(Conta d : cliente.getContas()){
+                    System.out.println(d);
+                    }
+                    
+                    idconta = sc.nextInt();
+
+                    System.out.println("Valor do emprestimo: ");
+                    float valorR = sc.nextFloat();
+
+                    cliente.getConta(idconta).addValor(valorR);
+
+                    break;
+                case 4:
+                    sc.nextLine();
+                    System.out.println("Selecione a conta que deseja desativar: ");
+                    for(Conta d : cliente.getContas()){
+                    System.out.println(d);
+                    }
+
+                    idconta = sc.nextInt();
+                    cliente.getConta(idconta).desativarConta();
+
+                    
+                    break;
                 case 5:
                 sistemaCliente = false;
                 break;
